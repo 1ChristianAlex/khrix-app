@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face{
+    font-family: 'Bangers', cursive;
+    src: url('/khix-app/src/assets/fonts/Bangers-regular.ttf') format('ttf')
+}
+body{
+    font-family: 'Bangers', cursive!important;
+    background-color: #191919!important;
+}
+a{
+    color:#e00403;
+}
