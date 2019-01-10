@@ -10,6 +10,9 @@ import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { CategoryComponent } from './category/category.component';
 import { ContactsComponent } from './contacts/contacts.component';
+import { SearchComponent } from './header/search/search.component';
+import { FooterComponent } from './footer/footer.component';
+
 
 const appRoutes:Routes = [
   { path:'about', component:AboutComponent , data:{title: "Sobre"}},
@@ -29,11 +32,14 @@ const appRoutes:Routes = [
     FeedComponent,
     LoginComponent,
     UserComponent,
-    ContactsComponent
+    ContactsComponent,
+    SearchComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

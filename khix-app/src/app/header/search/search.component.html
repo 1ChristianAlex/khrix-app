@@ -1,0 +1,10 @@
+<li class="nav-item">
+  <form action="" class="search-form">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" *ngIf="inputOpen" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="openInput(true)" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+      </div>
+    </div>
+  </form>
+</li>

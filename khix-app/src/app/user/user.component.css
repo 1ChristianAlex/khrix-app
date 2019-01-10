@@ -1,0 +1,16 @@
+.user-card {
+    background-color: #21295c;
+    padding-top: 10px;
+    position: relative;
+}
+.user-card p{
+    width: 67%;
+}
+.user-photo-img{
+    border-radius: 50%;
+    width: 30%;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+
+}

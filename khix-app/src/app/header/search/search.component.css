@@ -1,0 +1,19 @@
+.search-form{
+    margin-top: 5px;
+}
+.search-form button{
+    border: unset;
+    border-bottom: 3px solid #e00403;
+    margin: 0 10px;
+    color: #e00403;
+    transition: 0.3s ease;
+    text-transform: uppercase;
+}
+.search-form button:hover{
+    border-bottom: 3px solid #21295c;
+    transition: 0.3s ease;
+    background-color: #191919;
+}
+.search-form button:focus{
+    box-shadow:unset;
+}

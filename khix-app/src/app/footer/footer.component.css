@@ -1,0 +1,11 @@
+footer{
+    background-color:  #232323;
+    border-bottom: 1px solid #21295c;
+    color: white;
+    padding: 20px 0;
+}
+footer .list-line li{
+    display: inline;
+    font-size: 22pt;
+    margin: 0 7px;
+}
