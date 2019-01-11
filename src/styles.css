@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face{
     font-family: 'Bangers', cursive;
-    src: url('/khix-app/src/assets/fonts/Bangers-regular.ttf') format('ttf')
+    src: url('/khrix-app/src/assets/fonts/Bangers-regular.ttf') format('ttf')
 }
 body{
     font-family: 'Bangers', cursive!important;
