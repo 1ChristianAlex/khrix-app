@@ -11,7 +11,8 @@ header{
     margin-right: 20px;
 }
 .navigation{
-    margin-left: auto;
+    width: fit-content;
+    margin: 0 auto;
 }
 a.nav-link{
     border-bottom: 3px solid #e00403;
@@ -23,6 +24,12 @@ a.nav-link:hover{
     border-bottom: 3px solid #21295c;
     transition: 0.3s ease;
 }
+.navbar-nav.left{
+   float: left;
+}
+.navbar-nav svg{
+    margin: 0 5px;
+}
 @media only screen and (max-width:991px){
     .nav-header img{
         height: 60px;
@@ -32,4 +39,10 @@ a.nav-link:hover{
         height: 60px;
         margin-right: 20px;
     }
+    .navbar-nav.left{
+        margin: 0 auto;
+        width: fit-content;
+        float: unset;
+    }
+    
 }

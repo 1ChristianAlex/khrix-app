@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-search',
@@ -18,6 +18,10 @@ export class SearchComponent implements OnInit {
       return this.inputOpen = false;
     }
     if (stats == true) {
+      
+      let inputWid = (document.querySelector('.navigation') as HTMLElement).style.width; 
+      (document.querySelector('.search-input--header') as HTMLElement).style.width = inputWid;
+      console.log(inputWid)
       return this.inputOpen =  true;
     }
     else{

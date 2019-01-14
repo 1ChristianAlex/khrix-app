@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+
 
 import { AppComponent } from './app.component';
 import { AboutComponent } from './about/about.component';
@@ -12,6 +15,7 @@ import { CategoryComponent } from './category/category.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { SearchComponent } from './header/search/search.component';
 import { FooterComponent } from './footer/footer.component';
+import { CarouselComponent } from './header/carousel/carousel.component';
 
 
 const appRoutes:Routes = [
@@ -34,14 +38,18 @@ const appRoutes:Routes = [
     UserComponent,
     ContactsComponent,
     SearchComponent,
-    FooterComponent
+    FooterComponent,
+    CarouselComponent,
+    
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
+    NgbModule,
+  ],
+  providers: [
     
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

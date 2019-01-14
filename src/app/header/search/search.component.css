@@ -17,3 +17,8 @@
 .search-form button:focus{
     box-shadow:unset;
 }
+.search-input--header{
+    position: absolute;
+    width: 99px;
+    right: 100%;
+}
