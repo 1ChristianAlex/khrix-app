@@ -19,6 +19,6 @@
 }
 .search-input--header{
     position: absolute;
-    width: 99px;
+    width: 0px;
     right: 100%;
 }

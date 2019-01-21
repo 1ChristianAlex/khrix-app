@@ -1,0 +1,15 @@
+<section class="most-reads">
+  <div class="container">
+    <div class="col-md-12">
+      <h3>Mais lidos da semana <i class="fas fa-calendar-week"></i></h3>
+      <div *ngFor="let item of imgPath" class="col-md-3">
+        <div class="most-img">
+          <img src="../../assets/imagens/most-read/{{item}}" alt="">
+        </div>
+        <div class="most-tittle">
+          {{item}}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

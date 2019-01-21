@@ -1,32 +1,44 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
+import { trigger, state, style, transition,animate } from "@angular/animations";
+
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  styleUrls: ['./search.component.css'],
+  animations: [
+    trigger('openClose', [
+      // ...
+      state('hidden', style({
+        visibility:'hidden',
+        width:'0px'
+      })),
+      state('visible', style({
+        visibility:'visible',
+        width:'300px'
+      })),
+      transition('* <=> *', [
+        animate('0.3s')
+      ]),
+    ]),
+  ],
 })
 export class SearchComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  inputOpen:boolean;
-  openInput(stats:boolean):boolean{
-    if (this.inputOpen == true) {
-      return this.inputOpen = false;
-    }
-    if (stats == true) {
-      
-      let inputWid = (document.querySelector('.navigation') as HTMLElement).style.width; 
-      (document.querySelector('.search-input--header') as HTMLElement).style.width = inputWid;
-      console.log(inputWid)
-      return this.inputOpen =  true;
-    }
-    else{
-      return this.inputOpen=  false;
-    }
     
   }
+  inputOpen:string = 'hidden';
+  openInput(){
+   if (this.inputOpen == 'hidden') {
+     this.inputOpen = 'visible';
+   }
+   else{
+     this.inputOpen = 'hidden';
+   }
+   console.log(`click ${this.inputOpen}`);
+  }
+  
 }

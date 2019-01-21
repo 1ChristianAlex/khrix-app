@@ -12,5 +12,5 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     
   }
-
+  hq_tittles:string[] = ['Miles Morales', 'Spider-Gwen', 'Batman', 'Titans','Flash', 'Green Arrow',"The Avenger", 'X-man',"Venom"];
 }

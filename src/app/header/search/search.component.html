@@ -1,9 +1,9 @@
 <li class="nav-item">
   <form action="" class="search-form">
     <div class="input-group mb-3">
-      <input #inputChild type="text" class="search-input--header form-control" [hidden]="!inputOpen"  placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+      <input  [@openClose] = 'inputOpen' type="text" class="search-input--header form-control"   placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary" (click)="openInput(true)" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+        <button class="btn btn-outline-secondary" (click)="openInput()" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
       </div>
     </div>
   </form>

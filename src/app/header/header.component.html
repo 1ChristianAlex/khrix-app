@@ -29,5 +29,16 @@
   </nav>
 </header>
 <section class="banner-last">
-    <app-carousel></app-carousel>  
+    <app-carousel></app-carousel> 
 </section>
+<section class="last-uploads">
+  <div class="container">
+   <div class="content-last-hqs">
+    <div class="last-onsite" *ngFor="let item of hq_tittles">
+      <a href="#" class="name-title">
+        {{item}}
+      </a>
+    </div>
+   </div>
+  </div>
+</section>  
