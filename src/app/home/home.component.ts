@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
     this.getPath();
   }
   imgPath:string[] = []
+  
   getPath(){
     this.fileS.getImage().subscribe(item=>{
       this.imgPath.push(...item as string[])

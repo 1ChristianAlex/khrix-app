@@ -2,6 +2,7 @@
 exports.__esModule = true;
 var express = require("express");
 var fileSR_1 = require("./fileSR");
+var msSql_1 = require("./msSql");
 var app = express();
 var path = '../../src/assets/imagens/most-read';
 app.use(function (req, res, next) {
@@ -12,6 +13,13 @@ app.use(function (req, res, next) {
 app.get('/recents', function (req, res) {
     res.send(fileSR_1.readDir(path));
 });
-app.listen(8000, function (req, res) {
+app.get('/sql', function (req, res) {
+    res.send(new msSql_1.msSQL().connetBD());
+    res.end(new msSql_1.msSQL().closeDB());
+});
+app.post('/user', function (req, res) {
+    res.send(req.param('name'));
+});
+app.listen(4201, function (req, res) {
     console.log('serve on');
 });

@@ -7,5 +7,5 @@ exports.readDir = function (path) {
         _this.files = file;
     });
     console.log("files " + _this.files);
-    return JSON.stringify(_this.files);
+    return _this.files;
 };
