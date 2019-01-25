@@ -1,11 +1,6 @@
 "use strict";
-var _this = this;
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs");
 exports.readDir = function (path) {
-    fs.readdir(path, function (err, file) {
-        _this.files = file;
-    });
-    console.log("files " + _this.files);
-    return _this.files;
+    return fs.readdirSync(path);
 };

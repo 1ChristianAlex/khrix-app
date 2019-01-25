@@ -1,31 +1,35 @@
 import * as sql from "mssql";
 import bodyParser = require("body-parser");
 
+
+
 export class msSQL{
     constructor(){
         
     }
-    connStr = {
+    private connStr = {
         user: 'khrix',
         password: '123456',
-        server: 'localhost', // You can use 'localhost\\instance' to connect to named instance
-        port:4201,
+        server: '127.0.0.1', // You can use 'localhost\\instance' to connect to named instance
         database: 'KHRIX_APP',
     }
-    bd = new sql.ConnectionPool({...this.connStr},call =>{
-        
-    })
-    connetBD(){
-        
-        console.log({...this.connStr})
-        this.bd.connect().then(item =>{
-            item.query(((`select * from user` as unknown) as TemplateStringsArray),{...item}).then(res =>{
-                JSON.stringify(res)
-                console.log(JSON.stringify(res))
+    private pool = new sql.ConnectionPool(this.connStr);
+    conection(){
+        let result;
+        this.pool.connect().then(con =>{
+            console.log('conect')
+            con.query `select * from USERS`.then(q =>{
+                 result = q
+                 
             })
+            console.log(result)
         })
+        .catch(err=>{
+            console.error(err)
+        })
+        
     }
-    closeDB(){
-        return this.bd.close()
+    closeCon(){
+        return this.pool.close()
     }
 }

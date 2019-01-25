@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs");
 var readline = require("readline");
 var googleapis_1 = require("googleapis");
@@ -41,12 +41,12 @@ function authorize(credentials, callback) {
 function getAccessToken(oAuth2Client, callback) {
     var authUrl = oAuth2Client.generateAuthUrl({
         access_type: 'offline',
-        scope: SCOPES
+        scope: SCOPES,
     });
     console.log('Authorize this app by visiting this url:', authUrl);
     var rl = readline.createInterface({
         input: process.stdin,
-        output: process.stdout
+        output: process.stdout,
     });
     rl.question('Enter the code from that page here: ', function (code) {
         rl.close();
@@ -72,7 +72,7 @@ function listFiles(auth) {
     var drive = googleapis_1.google.drive({ version: 'v3', auth: auth });
     drive.files.list({
         pageSize: 10,
-        fields: 'nextPageToken, files(id, name)'
+        fields: 'nextPageToken, files(id, name)',
     }, function (err, res) {
         if (err)
             return console.log('The API returned an error: ' + err);
