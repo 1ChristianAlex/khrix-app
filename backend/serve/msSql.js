@@ -21,8 +21,8 @@ var msSQL = /** @class */ (function () {
             console.log('conect');
             con.query(templateObject_1 || (templateObject_1 = __makeTemplateObject(["select * from USERS"], ["select * from USERS"]))).then(function (q) {
                 result = q;
+                console.log(result);
             });
-            console.log(result);
         })
             .catch(function (err) {
             console.error(err);

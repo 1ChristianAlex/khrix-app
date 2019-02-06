@@ -20,9 +20,9 @@ export class msSQL{
             console.log('conect')
             con.query `select * from USERS`.then(q =>{
                  result = q
-                 
+                 console.log(result)
             })
-            console.log(result)
+            
         })
         .catch(err=>{
             console.error(err)

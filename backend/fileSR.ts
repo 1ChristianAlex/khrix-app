@@ -1,8 +1,16 @@
-import * as fs from "fs";
-import { async } from "q";
+import * as fs from 'fs';
 
 
 
-export const readDir = (path):Array<string>=>{
-   return fs.readdirSync(path)
+
+export class ComicsManager{
+   constructor(){}
+   
+   private Path():string{
+      return `../../../../Comics/Marvel Comics`;
+   }
+   async listFolder(){
+      return await fs.readdirSync(this.Path())
+   }
+   
 }
