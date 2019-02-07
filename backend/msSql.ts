@@ -1,35 +1,52 @@
 import * as sql from "mssql";
-import bodyParser = require("body-parser");
+import { ComicsManager } from "./fileSR";
 
 
-
-export class msSQL{
+export class msSQL extends ComicsManager{
     constructor(){
-        
+        super()
     }
-    private connStr = {
-        user: 'khrix',
-        password: '123456',
-        server: '127.0.0.1', // You can use 'localhost\\instance' to connect to named instance
-        database: 'KHRIX_APP',
-    }
+    
+    private Credential = this.readJson('./local.json');
+    private connStr= {...this.Credential.data}
     private pool = new sql.ConnectionPool(this.connStr);
-    conection(){
-        let result;
-        this.pool.connect().then(con =>{
-            console.log('conect')
-            con.query `select * from USERS`.then(q =>{
-                 result = q
-                 console.log(result)
+    
+    public createTable(tableName:string, tableAtr:sql.Table){
+        this.pool.connect().then((con)=>{
+            
+            tableAtr = new sql.Table(tableName);
+            tableAtr.create = true;
+            const req = con.request()
+            
+            req.bulk(tableAtr).then(data =>{
+                console.log('Table Creating sucess',data);
+            })
+            .catch(err =>{
+                console.log('Error on table creating function',err)
             })
             
         })
-        .catch(err=>{
-            console.error(err)
-        })
+    }
+    
+    public polutateTable(){
         
+        this.listDir().then(list =>{
+            this.pool.connect().then(con =>{
+                const req = con.request()
+                list.forEach((name,i)=>{
+                    req.query(`INSERT INTO MARVEL_TITLE_NAMES VALUES ('${i}','${name}')`).then(res=>{
+                        console.log(res)
+                    }).catch(err=>{
+                        console.log('Error on insert into DB',err)
+                    })
+                })
+            
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+            
+        })
     }
-    closeCon(){
-        return this.pool.close()
-    }
+   
 }

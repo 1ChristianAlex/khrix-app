@@ -1,9 +1,8 @@
 import * as express from "express";
-import { readDir } from "./fileSR";
+import * as Fr from "./fileSR";
 import { msSQL } from "./msSql";
 
 const app = express()
-const path:string = '../../src/assets/imagens/most-read';
 const sql = new msSQL()
 
 app.use(function(req, res, next) {
@@ -15,10 +14,10 @@ app.use(function(req, res, next) {
   
 
 app.get('/recents',(req, res)=>{
-    res.send(readDir(path))
+    
 })
 app.route('/').get((req,res)=>{
-    res.send(sql.conection());
+    
     
 })
 app.post('/user',(req,res)=>{
