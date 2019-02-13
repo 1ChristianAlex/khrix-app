@@ -4,7 +4,7 @@ import { RouterModule, Routes } from "@angular/router";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-import { FileSService } from "./services/file-s.service";
+import { RestF } from "./services/restF";
 import { HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from './app.component';
@@ -49,7 +49,7 @@ const appRoutes:Routes = [
     HttpClientModule
   ],
   providers: [
-    FileSService,HttpClientModule
+    RestF,HttpClientModule
   ],
   bootstrap: [AppComponent]
 })

@@ -1,28 +1,4 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -31,48 +7,109 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var sql = __importStar(require("mssql"));
-var fileSR_1 = require("./fileSR");
-var msSQL = /** @class */ (function (_super) {
-    __extends(msSQL, _super);
-    function msSQL() {
-        var _this = _super.call(this) || this;
-        _this.Credential = _this.readJson('./local.json');
-        _this.connStr = __assign({}, _this.Credential.data);
-        _this.pool = new sql.ConnectionPool(_this.connStr);
-        return _this;
+const sql = __importStar(require("mssql"));
+const fileSR_1 = require("./fileSR");
+class msSQL extends fileSR_1.ComicsManager {
+    constructor() {
+        super();
+        this.Credential = this.readJson('./local.json');
+        this.connStr = Object.assign({}, this.Credential.data);
+        this.pool = new sql.ConnectionPool(this.connStr);
     }
-    msSQL.prototype.createTable = function (tableName, tableAtr) {
-        this.pool.connect().then(function (con) {
+    createTable(tableName, tableAtr) {
+        this.pool.connect().then((con) => {
             tableAtr = new sql.Table(tableName);
             tableAtr.create = true;
-            var req = con.request();
-            req.bulk(tableAtr).then(function (data) {
+            const req = con.request();
+            req.bulk(tableAtr).then(data => {
                 console.log('Table Creating sucess', data);
             })
-                .catch(function (err) {
+                .catch(err => {
                 console.log('Error on table creating function', err);
             });
         });
-    };
-    msSQL.prototype.polutateTable = function () {
-        var _this = this;
-        this.listDir().then(function (list) {
-            _this.pool.connect().then(function (con) {
-                var req = con.request();
-                list.forEach(function (name, i) {
-                    req.query("INSERT INTO MARVEL_TITLE_NAMES VALUES ('" + i + "','" + name + "')").then(function (res) {
+    }
+    polutateTable() {
+        let date = new Date();
+        this.listDir().then(list => {
+            this.pool.connect().then(con => {
+                const req = con.request();
+                list.forEach((name, i) => {
+                    req.query(`INSERT INTO MARVEL_FOLDER VALUES ('${name}','${date.getMonth()}/${date.getDate()}/${date.getFullYear()}')`)
+                        .then(res => {
                         console.log(res);
-                    }).catch(function (err) {
+                    })
+                        .catch(err => {
                         console.log('Error on insert into DB', err);
                     });
                 });
             })
-                .catch(function (err) {
+                .catch(err => {
                 console.log(err);
             });
         });
-    };
-    return msSQL;
-}(fileSR_1.ComicsManager));
+    }
+    populateCategory() {
+        let date = new Date();
+        this.pool.connect().then(con => {
+            let req = con.request();
+            req.query(`SELECT NAME_FOLDER,ID FROM MARVEL_FOLDER`).then(result => {
+                result.recordsets.map(m => {
+                    m.map(name => {
+                        this.listDir(name.NAME_FOLDER).then(hq => {
+                            hq.map(unit => {
+                                req.query(`INSERT INTO MARVEL_HQ (HQ_NAME, FOLDER_ID, DATA_INSERT) VALUES ('${unit}',${name.ID},'${date.getMonth()}/${date.getDate()}/${date.getFullYear()}')`).then(() => {
+                                    console.log(unit, name.ID);
+                                }).catch(err => {
+                                    console.log(err);
+                                    console.log(`${unit},${name.id}`);
+                                });
+                            });
+                        }).catch(err => {
+                            console.log('erro');
+                        });
+                    });
+                });
+            });
+        });
+    }
+    listFolder() {
+        return new Promise((res, rej) => {
+            this.pool.connect().then(con => {
+                con.query `SELECT * FROM MARVEL_FOLDER`.then(result => {
+                    res(result);
+                    this.pool.close();
+                }).catch(err => {
+                    rej(err);
+                });
+            });
+        });
+    }
+    listHq(id) {
+        return new Promise((res, rej) => {
+            this.pool.connect().then(con => {
+                con.request().query(`Select * from MARVEL_HQ HQ
+                    INNER JOIN MARVEL_FOLDER F ON HQ.FOLDER_ID = F.ID
+                    WHERE F.ID = ${id}`).then(result => {
+                    res(result);
+                    this.pool.close();
+                });
+            });
+        });
+    }
+    lastUpdate() {
+        return new Promise((res, rej) => {
+            this.pool.connect().then(con => {
+                con.request().query(`Select * from MARVEL_HQ HQ
+                    ORDER BY HQ.DATA_INSERT DESC
+                    `).then(result => {
+                    res(result);
+                    this.pool.close();
+                }).catch(err => {
+                    rej(err);
+                });
+            });
+        });
+    }
+}
 exports.msSQL = msSQL;

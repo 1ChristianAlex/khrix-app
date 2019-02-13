@@ -7,17 +7,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var fs = __importStar(require("fs"));
-var ComicsManager = /** @class */ (function () {
-    function ComicsManager() {
+const fs = __importStar(require("fs"));
+class ComicsManager {
+    constructor() { }
+    Path() {
+        return `../../../../Comics/Marvel Comics`;
     }
-    ComicsManager.prototype.Path = function () {
-        return "../../../../Comics/Marvel Comics";
-    };
-    ComicsManager.prototype.listDir = function () {
-        var _this = this;
-        return new Promise(function (res, rej) {
-            fs.readdir(_this.Path(), function (err, file) {
+    listDir(add) {
+        return new Promise((res, rej) => {
+            let path;
+            (add) ? path = `${this.Path()}/${add}` : path = this.Path();
+            fs.readdir(path, (err, file) => {
                 if (err) {
                     rej(console.log('Erro on dir reader function', err));
                 }
@@ -26,11 +26,10 @@ var ComicsManager = /** @class */ (function () {
                 }
             });
         });
-    };
-    ComicsManager.prototype.readJson = function (path) {
-        var json = JSON.parse(fs.readFileSync(path).toString());
+    }
+    readJson(path) {
+        let json = JSON.parse(fs.readFileSync(path).toString());
         return json;
-    };
-    return ComicsManager;
-}());
+    }
+}
 exports.ComicsManager = ComicsManager;

@@ -6,9 +6,11 @@ export class ComicsManager{
    private Path():string{
       return `../../../../Comics/Marvel Comics`;
    }
-   listDir():Promise<Array<string>>{
+   listDir(add?:string):Promise<Array<string>>{
       return new Promise<Array<string>>((res,rej)=>{
-         fs.readdir(this.Path(),(err, file)=>{
+         let path:string;
+         (add)? path = `${this.Path()}/${add}` : path = this.Path();
+         fs.readdir(path,(err, file)=>{
             if (err) {
                rej(console.log('Erro on dir reader function', err))
             }
@@ -18,7 +20,7 @@ export class ComicsManager{
          })
       })
    }
-   readJson(path){
+   readJson(path:string){
       let json:JSON = JSON.parse(fs.readFileSync(path).toString())
       return json;
    }

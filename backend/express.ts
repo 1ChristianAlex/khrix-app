@@ -1,30 +1,52 @@
 import * as express from "express";
-import * as Fr from "./fileSR";
 import { msSQL } from "./msSql";
 
-const app = express()
-const sql = new msSQL()
+const app = express.default()
+const port = 3000;
+const sql = new msSQL();
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
-    
-  });
-  
+});
 
-app.get('/recents',(req, res)=>{
+app.route('/lastUpdate').get((req, res,next)=>{
+    sql.lastUpdate().then(item =>{
+        let last_hq:Array<Object>=[];
+        for (let i = 0; i < 6; i++) {
+            last_hq.push(item.recordset[i])
+        }
+        res.json(last_hq)
+        next();
+    })
     
-})
-app.route('/').get((req,res)=>{
-    
-    
-})
-app.post('/user',(req,res)=>{
-    res.send(req.param('name'))
 })
 
-app.listen(4201,(req,res)=>{
-    console.log('serve on');
-    
+app.route('/comics').get((req,res,next)=>{
+    sql.listFolder().then(item=>{
+       res.json(item.recordsets)
+    })
+})
+app.route('/comics/:folder').get((req, res, next)=>{
+    sql.listFolder().then(item=>{
+        item.recordsets.map(hq =>{
+            hq.map(name =>{
+               if (name.ID == req.params.folder){
+                   res.json(name)
+               }
+            })
+        })
+        next()
+     })
+})
+app.route('/comics/:folder/hq').get((req,res,next)=>{
+    sql.listHq(req.params.folder).then(hq =>{
+        let item:Array<Object> = hq.recordset
+        res.json(item)
+    })
+})
+
+app.listen(port, 'localhost', ()=>{
+    console.log('runing')
 })

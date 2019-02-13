@@ -7,22 +7,49 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express = __importStar(require("express"));
-var msSql_1 = require("./msSql");
-var app = express();
-var sql = new msSql_1.msSQL();
+const express = __importStar(require("express"));
+const msSql_1 = require("./msSql");
+const app = express.default();
+const port = 3000;
+const sql = new msSql_1.msSQL();
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-app.get('/recents', function (req, res) {
+app.route('/lastUpdate').get((req, res, next) => {
+    sql.lastUpdate().then(item => {
+        let last_hq = [];
+        for (let i = 0; i < 6; i++) {
+            last_hq.push(item.recordset[i]);
+        }
+        res.json(last_hq);
+        next();
+    });
 });
-app.route('/').get(function (req, res) {
+app.route('/comics').get((req, res, next) => {
+    sql.listFolder().then(item => {
+        res.json(item.recordsets);
+    });
 });
-app.post('/user', function (req, res) {
-    res.send(req.param('name'));
+app.route('/comics/:folder').get((req, res, next) => {
+    sql.listFolder().then(item => {
+        item.recordsets.map(hq => {
+            hq.map(name => {
+                if (name.ID == req.params.folder) {
+                    res.json(name);
+                }
+            });
+        });
+        next();
+    });
 });
-app.listen(4201, function (req, res) {
-    console.log('serve on');
+app.route('/comics/:folder/hq').get((req, res, next) => {
+    sql.listHq(req.params.folder).then(hq => {
+        let item = hq.recordset;
+        res.json(item);
+    });
+});
+app.listen(port, 'localhost', () => {
+    console.log('runing');
 });
