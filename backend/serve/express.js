@@ -51,5 +51,5 @@ app.route('/comics/:folder/hq').get((req, res, next) => {
     });
 });
 app.listen(port, 'localhost', () => {
-    console.log('runing');
+    console.log(`Server is runing on http://localhost:${port}`);
 });

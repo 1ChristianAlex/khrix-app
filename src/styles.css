@@ -1,10 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@font-face{
-    font-family: 'Bangers', cursive;
-    src: url('/khrix-app/src/assets/fonts/Bangers-regular.ttf') format('ttf')
-}
+
+@import url('https://fonts.googleapis.com/css?family=Teko:400,500,600,700');
 body{
-    font-family: 'Bangers', cursive!important;
+    font-family: 'Teko', sans-serif!important;
     background-color: #121212!important;
 }
 a{

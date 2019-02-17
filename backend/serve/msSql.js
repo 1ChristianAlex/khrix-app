@@ -13,8 +13,8 @@ class msSQL extends fileSR_1.ComicsManager {
     constructor() {
         super();
         this.Credential = this.readJson('./local.json');
-        this.connStr = Object.assign({}, this.Credential.data);
-        this.pool = new sql.ConnectionPool(this.connStr);
+        this.connStr = JSON.parse(JSON.stringify(this.Credential));
+        this.pool = new sql.ConnectionPool(this.connStr.data);
     }
     createTable(tableName, tableAtr) {
         this.pool.connect().then((con) => {
@@ -47,6 +47,7 @@ class msSQL extends fileSR_1.ComicsManager {
                 .catch(err => {
                 console.log(err);
             });
+            let teste;
         });
     }
     populateCategory() {

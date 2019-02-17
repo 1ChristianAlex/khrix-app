@@ -7,9 +7,9 @@ export class msSQL extends ComicsManager{
         super()
     }
     
-    private Credential = this.readJson('./local.json');
-    private connStr= {...this.Credential.data}
-    private pool = new sql.ConnectionPool(this.connStr);
+    private Credential:JSON = this.readJson('./local.json');
+    private connStr= JSON.parse(JSON.stringify(this.Credential))
+    private pool = new sql.ConnectionPool(this.connStr.data);
     
     public createTable(tableName:string, tableAtr:sql.Table){
         this.pool.connect().then((con)=>{
@@ -47,7 +47,7 @@ export class msSQL extends ComicsManager{
             .catch(err=>{
                 console.log(err)
             })
-            
+            let teste;
         })
         
     }

@@ -5,7 +5,9 @@ header{
 .nav-header img{
     height: 86px;
 }
-
+a.nav-link {
+    font-size: 14pt;
+}
 .logo{
     height: 86px;
     margin-right: 20px;

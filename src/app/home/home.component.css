@@ -5,3 +5,12 @@
     width: 100%;
     text-align: center;
 }
+section.most-reads {
+    background: #232323;
+}
+section.most-reads h3 {
+    color: #e10403;
+}
+a.name-title {
+    font-size: 14pt;
+}
