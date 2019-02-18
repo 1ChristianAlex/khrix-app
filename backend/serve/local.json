@@ -1,8 +1,0 @@
-{
-        "data":{
-                "user": "khrix",
-                "password": "123456",
-                "server": "localhost", 
-                "database": "KHRIX_APP"
-        }
-}
