@@ -8,7 +8,6 @@
 # dependencies
 /node_modules
 /backend/serve
-
 # IDEs and editors
 /.idea
 .project

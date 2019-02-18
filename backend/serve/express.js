@@ -8,47 +8,32 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = __importStar(require("express"));
-const msSql_1 = require("./msSql");
+const bodyParser = require("body-parser");
+const mySQL_1 = require("./mySQL");
+const db = new mySQL_1.msSQL;
 const app = express.default();
 const port = 3000;
-const sql = new msSql_1.msSQL();
+app.use(bodyParser());
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Content-Type', 'Aplication/json');
     next();
 });
-app.route('/lastUpdate').get((req, res, next) => {
-    sql.lastUpdate().then(item => {
-        let last_hq = [];
-        for (let i = 0; i < 6; i++) {
-            last_hq.push(item.recordset[i]);
-        }
-        res.json(last_hq);
+app.route('/user').post((req, res, next) => {
+    db.login(req.body).then(data => {
+        console.log(data);
+        res.json(data);
         next();
     });
+});
+app.route('/lastUpdate').get((req, res, next) => {
 });
 app.route('/comics').get((req, res, next) => {
-    sql.listFolder().then(item => {
-        res.json(item.recordsets);
-    });
 });
 app.route('/comics/:folder').get((req, res, next) => {
-    sql.listFolder().then(item => {
-        item.recordsets.map(hq => {
-            hq.map(name => {
-                if (name.ID == req.params.folder) {
-                    res.json(name);
-                }
-            });
-        });
-        next();
-    });
 });
 app.route('/comics/:folder/hq').get((req, res, next) => {
-    sql.listHq(req.params.folder).then(hq => {
-        let item = hq.recordset;
-        res.json(item);
-    });
 });
 app.listen(port, 'localhost', () => {
     console.log(`Server is runing on http://localhost:${port}`);
