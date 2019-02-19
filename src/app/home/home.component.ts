@@ -14,19 +14,14 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getLastUpdate();
   }
-  lastUpdates:Array<HQ_file>=[];
+  lastCategoryAdd:Array<Object>=[];
+  lastHQAdd:Array<HQ_file>=[];
   getLastUpdate(){
-    this.rest.getLastUpdate().then(item =>{
-      item.map(hq=>{
-        let name = hq.HQ_NAME.split('.')[0];
-        
-        this.lastUpdates.push({
-          HQ_NAME:name,
-          DATA_INSERT:hq.DATA_INSERT,
-          FOLDER_ID:hq.FOLDER_ID,
-          ID:hq.ID
-        })
-      })
+    this.rest.getLastUpdate().then((obj: {hq:Array<HQ_file>, category:Array<Object>})=>{
+      this.lastHQAdd = obj.hq;
+      this.lastCategoryAdd = obj.category;
+      console.log(this.lastCategoryAdd)
+      console.log(this.lastHQAdd)
     })
   }
   

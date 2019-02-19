@@ -14,3 +14,24 @@ section.most-reads h3 {
 a.name-title {
     font-size: 14pt;
 }
+.last-onsite {
+    width: fit-content;
+    float: left;
+    margin: 10px;
+}
+.last-uploads{
+    display: inline-block;
+    width: 100%;
+    margin: 10px 0;
+}
+a.name-title {
+    background-color: #21295c;
+    padding: 10px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+
+}
+.content-last-hqs{
+    width: fit-content;
+    margin: 0 auto;
+}

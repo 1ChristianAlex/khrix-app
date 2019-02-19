@@ -7,7 +7,7 @@
 
 # dependencies
 /node_modules
-/backend/serve
+
 # IDEs and editors
 /.idea
 .project
@@ -37,3 +37,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+#ignore .js server folder
+/backend/serve
+backend/serve/mySQL.json

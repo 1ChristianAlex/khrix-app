@@ -8,8 +8,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = __importStar(require("express"));
-const bodyParser = require("body-parser");
 const mySQL_1 = require("./mySQL");
+const bodyParser = require("body-parser");
 const db = new mySQL_1.msSQL;
 const app = express.default();
 const port = 3000;
@@ -28,12 +28,41 @@ app.route('/user').post((req, res, next) => {
     });
 });
 app.route('/lastUpdate').get((req, res, next) => {
+    db.getLastCategoryUpdate().then((content) => {
+        db.getLastHQUpdate().then((hq) => {
+            let group = { hq: hq, category: content };
+            res.json(group);
+        });
+    }).catch(err => {
+        console.log(err);
+    });
 });
 app.route('/comics').get((req, res, next) => {
+    db.getAllComicsFolder().then(content => {
+        res.json(content);
+        next();
+    }).catch(err => {
+        console.log(err);
+        next();
+    });
 });
-app.route('/comics/:folder').get((req, res, next) => {
+app.route('/comics/category-:folder').get((req, res, next) => {
+    db.getAllComicsHq(req.params.folder).then(content => {
+        res.json(content);
+        next();
+    }).catch(err => {
+        console.log(err);
+        next();
+    });
 });
-app.route('/comics/:folder/hq').get((req, res, next) => {
+app.route('/comics/category-:folder/hq-:hq').get((req, res, next) => {
+    db.getSingleHQ(req.params.folder, req.params.hq).then(content => {
+        res.json(content);
+        next();
+    }).catch(err => {
+        console.log(err);
+        next();
+    });
 });
 app.listen(port, 'localhost', () => {
     console.log(`Server is runing on http://localhost:${port}`);
