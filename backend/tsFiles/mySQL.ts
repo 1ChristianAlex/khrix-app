@@ -46,7 +46,7 @@ export class msSQL{
                 }
                 else{
                     let lastUpdate:Array<Object>=[];
-                    for (let i = 0; i < 6; i++) {
+                    for (let i = 0; i < 5; i++) {
                         lastUpdate.push(values[i])
                     }
                     this.conection().end();
@@ -118,6 +118,25 @@ export class msSQL{
             select HQ_NAME, H.DATA_MODIFICATION from MARVEL_HQ H
             where H.ID = '${id_hq}' and H.FOLDER_ID = '${id_folder}'
             `,(err, value)=>{
+                if (err) {
+                    rej(err)
+                }
+                else{
+                    res(value)
+                }
+            })
+
+            this.conection().end()
+        })
+    }
+    public getLastBlogPost():Promise<any>{
+        return new Promise((res,rej)=>{
+            this.conection().connect()
+            this.conection().query(`
+            SELECT * FROM POST_BLOG_CONTENT P
+            join USERS U ON P.AUTHOR = U.ID
+            ORDER BY POST_DATE
+            LIMIT 2`,(err, value:{CONTENT:string,IMAGE_PATH:string,POST_DATE:string,USER_NAME:string})=>{
                 if (err) {
                     rej(err)
                 }

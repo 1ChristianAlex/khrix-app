@@ -5,7 +5,7 @@ import bodyParser = require("body-parser");
 
 
 const db = new msSQL;
-const app = express.default()
+const app = express.default();
 const port = 3000;
 
 app.use(bodyParser());
@@ -28,7 +28,7 @@ app.route('/lastUpdate').get((req:express.Request, res:express.Response,next:exp
     db.getLastCategoryUpdate().then((content:Array<Object>) =>{
         db.getLastHQUpdate().then((hq:Array<Object>)=>{
             let group:Object = {hq:hq,category:content};
-            res.json(group)
+            res.json(group);
         })
     }).catch(err=>{
         console.log(err)
@@ -64,6 +64,14 @@ app.route('/comics/category-:folder/hq-:hq').get((req:express.Request,res:expres
         next();
     })
     
+})
+app.route('/lastBlogPost').get((req:express.Request,res:express.Response,next:express.NextFunction)=>{
+    db.getLastBlogPost().then((resut)=>{
+        res.json(resut);
+        next();
+    }).catch(err =>{
+        console.log(err);
+    })
 })
 
 app.listen(port, 'localhost', ()=>{

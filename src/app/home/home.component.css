@@ -1,12 +1,12 @@
 .hq-home-content .hq-home-txt h2{
-    font-size: 10pt;
+    font-size: 14pt;
 }
 .hq-home-txt {
     width: 100%;
     text-align: center;
 }
 section.most-reads {
-    background: #232323;
+    background: #121212;
 }
 section.most-reads h3 {
     color: #e10403;
@@ -34,4 +34,39 @@ a.name-title {
 .content-last-hqs{
     width: fit-content;
     margin: 0 auto;
+}
+.hq-home-img {
+    width: 25%;
+    float: left;
+}
+ul.list-home-hq {
+    list-style: none;
+    padding: 0;
+    display: inline-block;
+    margin: 30px 0;
+}
+.hq-home-content {
+    clear: both;
+}
+.hq-home-txt{
+    width: 60%;
+    float: left;
+    text-align: left;
+    margin: 10% 0 0 0;
+}
+.last-relased,
+.last-post-blog{
+    background-color: #232323;
+    padding: 10px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.last-post-blog h1 {
+    font-size: 15pt;
+}
+.post-text {
+    margin: 20px 0 0 0;
+}
+section.discord-youtube {
+    margin: 35px 0;
 }

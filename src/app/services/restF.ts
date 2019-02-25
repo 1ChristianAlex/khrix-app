@@ -13,9 +13,19 @@ export class RestF {
   public getLastUpdate():Promise<any>{
     return new Promise((res,rej)=>{
       this.httpRest.request('get',`${this.url}/lastUpdate`).subscribe((sub: {hq:Array<HQ_file>, category:Array<Object>} )=>{
-        
         res(sub)
       })
+    })
+  }
+  public getLastBlogPost(){
+    return new Promise((res,rej)=>{
+      try {
+        this.httpRest.get(`${this.url}/lastBlogPost`).subscribe((lastBlog :{CONTENT:string,IMAGE_PATH:string,POST_DATE:string,USER_NAME:string}) =>{
+          res(lastBlog);
+        })
+      } catch (error) {
+        rej(error);
+      }
     })
   }
 }

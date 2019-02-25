@@ -64,6 +64,14 @@ app.route('/comics/category-:folder/hq-:hq').get((req, res, next) => {
         next();
     });
 });
+app.route('/lastBlogPost').get((req, res, next) => {
+    db.getLastBlogPost().then((resut) => {
+        res.json(resut);
+        next();
+    }).catch(err => {
+        console.log(err);
+    });
+});
 app.listen(port, 'localhost', () => {
     console.log(`Server is runing on http://localhost:${port}`);
 });

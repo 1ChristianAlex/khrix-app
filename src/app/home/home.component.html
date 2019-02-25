@@ -1,36 +1,68 @@
 <section class="last-uploads">
-  <div class="container">
-   <div class="content-last-hqs">
+  <div class="content-last-hqs">
     <div class="last-onsite" *ngFor="let item of lastCategoryAdd">
       <a href="#" class="name-title">
         {{item.FOLDER_NAME}}
       </a>
     </div>
-   </div>
   </div>
 </section>  
 <section class="most-reads">
   <div class="container">
-    <div class="col-md-12">
-      <h3>Last Add <i class="fas fa-calendar-week"></i></h3>
-      <div class="row">
-          <div *ngFor="let item of lastHQAdd" class="col-md-2">
-            <div class="hq-home-content">
-              <div class="hq-home-img">
-                <a href="#">
-                  <img src="../../assets/imagens/logo-comics.png"class = 'img-fluid' alt="" srcset="">
-                </a>
+   <div class="row">
+      <div class="col-md-6">
+          <div class="last-relased">
+            <h3>Last Add <i class="fas fa-calendar-week"></i></h3>
+            <ul class= 'list-home-hq'>
+              <div *ngFor="let item of lastHQAdd" class="each-hq">
+                <li>
+                  <div class="hq-home-content">
+                    <div class="hq-home-img">
+                      <a href="#">
+                        <img src="../../assets/imagens/logo-comics.png"class = 'img-fluid' alt="" srcset="">
+                      </a>
+                    </div>
+                    <div class="hq-home-txt">
+                      <a href="#">
+                        <h2>
+                          {{item.HQ_NAME}}
+                        </h2>
+                      </a>
+                    </div>
+                  </div>
+                </li>
               </div>
-            <div class="hq-home-txt">
-            <a href="#">
-                <h2>
-                    {{item.HQ_NAME}}
-                </h2>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="last-post-blog" *ngFor = "let post of lastBlogPost">
+            <div class="post-img">
+            <a href="#">  <img src="{{post.IMAGE_PATH}}" alt="" class="img-fluid"></a>
+            </div>
+            <div class="post-text">
+              <a href="#">
+                <h1>{{post.TITLE_POST}}</h1>
               </a>
             </div>
           </div>
-             </div>
+        </div>
+   </div>
+  </div>
+</section>
+<section class="discord-youtube">
+ <div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="youtube embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item " width="949" height="534" src="https://www.youtube.com/embed/8pR0o2fGyHg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+      <div class="col-md-6">
+        <div class="discord embed-responsive embed-responsive-4by3">
+          <iframe class="embed-responsive-item " src="https://discordapp.com/widget?id=365916960191676427&theme=dark" width="350" height="250" allowtransparency="true" frameborder="0"></iframe>
+        </div>
       </div>
     </div>
-  </div>
+ </div>
 </section>
