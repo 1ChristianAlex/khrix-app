@@ -14,7 +14,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getLastUpdate();
     this.getLastBlog();
+    this.reziseDiscord();
   }
+  baseUrl:string = location.origin;
   lastCategoryAdd:Array<Object>=[];
   lastHQAdd:Array<HQ_file>=[];
   lastBlogPost:Array<{TITLE_POST:string,CONTENT:string,IMAGE_PATH:string,POST_DATE:string,USER_NAME:string}> = []
@@ -27,15 +29,18 @@ export class HomeComponent implements OnInit {
   }
   
   public getLastBlog(){
-    this.rest.getLastBlogPost().then((post:Array<{TITLE_POST:string,CONTENT:string,IMAGE_PATH:string,POST_DATE:string,USER_NAME:string}>)=>{
+    this.rest.getLastBlogPost().then((post:Array<{ID:Number,TITLE_POST:string,CONTENT:string,IMAGE_PATH:string,POST_DATE:string,USER_NAME:string}>)=>{
         post.map(item=>{
           this.lastBlogPost.push({
             ...item,
-            TITLE_POST:item.TITLE_POST.replace('<h1>','').replace('</h1>','')
+            TITLE_POST:item.TITLE_POST.replace('<h1>','').replace('</h1>',''),
           })
         })
       console.log(this.lastBlogPost)
     });
   };
-  
+
+  private reziseDiscord():void{
+    (document.querySelector('.discord') as HTMLElement).style.height = `${(document.querySelector('.youtube') as HTMLElement).offsetHeight}px`
+  }
 }

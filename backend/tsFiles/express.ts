@@ -5,7 +5,7 @@ import bodyParser = require("body-parser");
 
 
 const db = new msSQL;
-const app = express.default();
+const app:express.Express = express.default();
 const port = 3000;
 
 app.use(bodyParser());
@@ -73,7 +73,11 @@ app.route('/lastBlogPost').get((req:express.Request,res:express.Response,next:ex
         console.log(err);
     })
 })
-
+app.get('/post/:id',((req:express.Request,res:express.Response,next:express.NextFunction)=>{
+    db.getSinglePost(req.params.id).then(send=>{
+        res.json(send)
+    })
+}))
 app.listen(port, 'localhost', ()=>{
     console.log(`Server is runing on http://localhost:${port}`)
 })

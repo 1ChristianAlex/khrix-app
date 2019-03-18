@@ -38,10 +38,10 @@
         <div class="col-md-6">
           <div class="last-post-blog" *ngFor = "let post of lastBlogPost">
             <div class="post-img">
-            <a href="#">  <img src="{{post.IMAGE_PATH}}" alt="" class="img-fluid"></a>
+            <a routerLink="/post/{{post.ID}}">  <img src="{{post.IMAGE_PATH}}" alt="" class="img-fluid"></a>
             </div>
             <div class="post-text">
-              <a href="#">
+              <a routerLink="/post/{{post.ID}}">
                 <h1>{{post.TITLE_POST}}</h1>
               </a>
             </div>

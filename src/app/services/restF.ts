@@ -20,12 +20,19 @@ export class RestF {
   public getLastBlogPost(){
     return new Promise((res,rej)=>{
       try {
-        this.httpRest.get(`${this.url}/lastBlogPost`).subscribe((lastBlog :{CONTENT:string,IMAGE_PATH:string,POST_DATE:string,USER_NAME:string}) =>{
+        this.httpRest.get(`${this.url}/lastBlogPost`).subscribe((lastBlog :{ID:Number,CONTENT:string,IMAGE_PATH:string,POST_DATE:string,USER_NAME:string}) =>{
           res(lastBlog);
         })
       } catch (error) {
         rej(error);
       }
+    })
+  }
+  public getSinglePost(path){
+    return new Promise((res, rej)=>{
+      this.httpRest.get(`${this.url}${path}`).subscribe((post:{ID:Number,CONTENT:string,IMAGE_PATH:string,POST_DATE:string,USER_NAME:string})=>{
+        res(post)
+      })
     })
   }
 }

@@ -10,6 +10,15 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    
+    console.log(this.getHome())
+  }
+  getHome():boolean{
+    let isHome = location.pathname;
+    if (isHome == "" || isHome == "/") {
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 }
