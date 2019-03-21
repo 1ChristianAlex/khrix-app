@@ -18,9 +18,11 @@ import { SearchComponent } from './header/search/search.component';
 import { FooterComponent } from './footer/footer.component';
 import { CarouselComponent } from './header/carousel/carousel.component';
 import { HomeComponent } from './home/home.component';
+import { PostSinglePageComponent } from './post-single-page/post-single-page.component';
 
 
 const appRoutes:Routes = [
+  { path:'post/:id', component:PostSinglePageComponent , data:{title: "Post"}},
   { path:'about', component:AboutComponent , data:{title: "Sobre"}},
   { path:'feed', component:FeedComponent , data:{title: "Feed" }},
   { path:'login', component:LoginComponent , data:{title:"Login" }},
@@ -39,7 +41,8 @@ const appRoutes:Routes = [
     SearchComponent,
     FooterComponent,
     CarouselComponent,
-    HomeComponent
+    HomeComponent,
+    PostSinglePageComponent
   ],
   imports: [
     BrowserModule,

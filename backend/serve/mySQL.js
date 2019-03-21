@@ -123,10 +123,28 @@ class msSQL {
         return new Promise((res, rej) => {
             this.conection().connect();
             this.conection().query(`
-            SELECT * FROM POST_BLOG_CONTENT P
+            SELECT P.ID, P.CONTENT, P.TITLE_POST, P.IMAGE_PATH,P.POST_DATE FROM POST_BLOG_CONTENT P
             join USERS U ON P.AUTHOR = U.ID
             ORDER BY POST_DATE
             LIMIT 2`, (err, value) => {
+                if (err) {
+                    rej(err);
+                }
+                else {
+                    console.log(value);
+                    res(value);
+                }
+            });
+            this.conection().end();
+        });
+    }
+    getSinglePost(id) {
+        return new Promise((res, rej) => {
+            this.conection().connect();
+            this.conection().query(`
+            SELECT P.ID, P.CONTENT, P.TITLE_POST, P.IMAGE_PATH,P.POST_DATE, U.USER_NAME FROM POST_BLOG_CONTENT P
+            join USERS U ON P.AUTHOR = U.ID
+            WHERE P.ID = ${id}`, (err, value) => {
                 if (err) {
                     rej(err);
                 }

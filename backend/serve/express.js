@@ -72,6 +72,11 @@ app.route('/lastBlogPost').get((req, res, next) => {
         console.log(err);
     });
 });
+app.get('/post/:id', ((req, res, next) => {
+    db.getSinglePost(req.params.id).then(send => {
+        res.json(send);
+    });
+}));
 app.listen(port, 'localhost', () => {
     console.log(`Server is runing on http://localhost:${port}`);
 });

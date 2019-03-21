@@ -1,6 +1,6 @@
 <header class="header-app">
   <nav class="container navbar navbar-expand-lg nav-header ">
-    <a class="navbar-brand logo" href="#"><img src="../../assets/imagens/logo.png" class="img-fluid"></a>
+    <a class="navbar-brand logo" routerLink='/'><img src="../../assets/imagens/logo.png" class="img-fluid"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -29,6 +29,6 @@
   </nav>
 </header>
 <section class="banner-last">
-    <app-carousel></app-carousel> 
+  <app-carousel *ngIf="getHome()== true"></app-carousel> 
 </section>
 
