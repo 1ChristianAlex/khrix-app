@@ -57,7 +57,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "khrix-app:build"
+            "browserTarget": "khrix-app:build",
+            "port": 80,
+            "host": "35.247.211.56"
           },
           "configurations": {
             "production": {
