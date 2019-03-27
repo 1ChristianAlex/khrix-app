@@ -59,7 +59,7 @@
           "options": {
             "browserTarget": "khrix-app:build",
             "port": 80,
-            "host": "35.247.211.56"
+            "host": "10.158.0.3"
           },
           "configurations": {
             "production": {
